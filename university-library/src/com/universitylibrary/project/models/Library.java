@@ -89,6 +89,11 @@ public class Library {
     }
 
     public Library build() {
+      if (name == null || address == null || schedule == null || userList.toArray().length == 0 || bookList.toArray().length == 0) {
+        throw new IllegalStateException("Name, address, schedule, userList and book list are mandatory");
+      }
+
+
       return new Library(this);
     }
   }

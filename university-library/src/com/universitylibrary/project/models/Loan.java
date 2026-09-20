@@ -2,11 +2,10 @@ package com.universitylibrary.project.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Loan {
   private final Book book;
-  private final UUID userId;
+  private final String userId;
   private final LocalDate loanDate;
   private final LocalDate limitDate;
   private LocalDate returnDate;
@@ -19,11 +18,23 @@ public class Loan {
     this.returnDate = builder.returnDate;
   }
 
+  public void registerReturnDate(LocalDate date) {
+    this.returnDate = date;
+  }
+
+  public boolean expiredReturnDate(LocalDate date) {
+    return returnDate == null && date.isAfter(limitDate);
+  }
+
+  public Book getBook() {
+    return book;
+  }
+
   public String getBookName() {
     return book.getName();
   }
 
-  public UUID getUserId() {
+  public String getUserId() {
     return userId;
   }
 
@@ -41,7 +52,7 @@ public class Loan {
 
   public static class Builder {
     private Book book;
-    private UUID userId;
+    private String userId;
     private LocalDate loanDate;
     private LocalDate limitDate;
     private LocalDate returnDate;
@@ -51,7 +62,7 @@ public class Loan {
       return this;
     }
 
-    public Builder userId(UUID userId) {
+    public Builder userId(String userId) {
       this.userId = userId;
       return this;
     }
@@ -67,6 +78,10 @@ public class Loan {
     }
 
     public Loan build() {
+      if (book == null || userId == null) {
+        throw new IllegalStateException("Book and user are mandatory");
+      }
+
       return new Loan(this);
     }
   }

@@ -1,16 +1,15 @@
 package com.universitylibrary.project.models;
 
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.UUID;
 
 public class User {
-    private UUID id;
+    private String id;
     private String fullName;
     private String address;
     private String phoneNumber;
     private ArrayList<Book> bookListLoaned;
     private boolean isPenalted;
+    private int activeLoans;
 
     private User(Builder builder) {
         this.id = builder.id;
@@ -19,9 +18,10 @@ public class User {
         this.phoneNumber = builder.phoneNumber;
         this.bookListLoaned = builder.bookListLoaned;
         this.isPenalted = builder.isPenalted;
+        this.activeLoans = 0;
     }
 
-    public UUID id() { return id; }
+    public String id() { return id; }
 
     public String getFullName() { return fullName; }
 
@@ -33,15 +33,27 @@ public class User {
 
     public boolean isPenalted() { return isPenalted; }
 
+    public void addActiveLoans() {
+      activeLoans++;
+    }
+
+    public void subtractActiveLoans() {
+      if (activeLoans > 0) activeLoans--;
+    }
+
+    public String getId() {
+      return id;
+    }
+
     public static class Builder {
-      private UUID id;
+      private String id;
       private String fullName;
       private String address;
       private String phoneNumber;
       private ArrayList<Book> bookListLoaned;
       private boolean isPenalted;
 
-      public Builder id(UUID id) {
+      public Builder id(String id) {
         this.id = id;
         return this;
       }
