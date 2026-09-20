@@ -45,6 +45,11 @@ public class User {
       return id;
     }
 
+    @Override
+    public String toString() {
+      return "User called " + fullName + "and lives in " + address + "and has the active loans: " + activeLoans;
+    }
+
     public static class Builder {
       private String id;
       private String fullName;

@@ -24,7 +24,19 @@ public class UserManager {
     return instance;
   }
 
-  public void addUser(User user) {
+  public User addUser(String id, String fullName, String address, String phoneNumber) {
+    User user = new User.Builder()
+        .id(id)
+        .fullName(fullName)
+        .address(address)
+        .phoneNumber(phoneNumber)
+        .build();
+
+    users.add(user);
+    return user;
+  }
+
+  public void verifyUser(User user) {
     if(searchById(user.getId()).isPresent()) {
       throw new IllegalStateException("There is an existing user with id" + user.getId());
     }
