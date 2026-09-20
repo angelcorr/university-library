@@ -16,6 +16,7 @@ public class BookController {
 
   private void attachEvents() {
     view.getAddButton().setOnAction(e -> handleAddBook());
+    view.getCloneButton().setOnAction(e -> handleCloneBook());
   }
 
   private void handleAddBook() {
@@ -35,6 +36,20 @@ public class BookController {
       view.getMessageLabel().setText("Error: " + ex.getMessage());
     }
   }
+
+  private void handleCloneBook() {
+    try {
+      Book original = manager.searchBookByIsbn(view.getCloneSourceIsbnField().getText());
+      Book clone = original.cloneWithNewIsbn(view.getCloneNewIsbnField().getText());
+      manager.addExistingBook(clone);
+      view.getMessageLabel().setText("Cloned: " + clone.getTitle() + " (new ISBN: " + clone.getIsbn() + ")");
+      view.getCloneSourceIsbnField().clear();
+      view.getCloneNewIsbnField().clear();
+    } catch (Exception ex) {
+      view.getMessageLabel().setText("Error: " + ex.getMessage());
+    }
+  }
+
 
   private void clearFields() {
     view.getIsbnField().clear();

@@ -1,9 +1,7 @@
 package com.universitylibrary.project.exceptions;
 
-import com.universitylibrary.project.models.Book;
-
 public class BookNotFound extends LibraryException {
-  public BookNotFound(Book book) {
-    super("The book " + book.getTitle() + " you searched for is not found");
+  public BookNotFound(String isbn) {
+    super("The book with isbn " + isbn + " you searched for is not found");
   }
 }

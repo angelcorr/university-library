@@ -21,8 +21,6 @@ public class User {
         this.activeLoans = 0;
     }
 
-    public String id() { return id; }
-
     public String getFullName() { return fullName; }
 
     public String getAddress() { return address; }
