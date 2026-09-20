@@ -1,6 +1,6 @@
 package com.universitylibrary.project.models;
 
-public class Book {
+public class Book implements Cloneable {
   private String isbn;
   private String title;
   private String publishingHouse;
@@ -47,6 +47,18 @@ public class Book {
     return "Book title" + title + ". Was published by " + publishingHouse + " and has " + totalPages + " pages.";
   }
 
+  public Book cloneWithNewIsbn(String newIsbn) {
+    try {
+      Book copy = (Book) super.clone();
+      copy.isbn = newIsbn;   // cada copia necesita su propio ISBN único
+      copy.isLoaned = false; // una copia nueva siempre arranca disponible
+      return copy;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError("Book should be cloneable", e);
+    }
+
+  }
+
   public static class Builder {
     private String isbn;
     private String name;
@@ -60,7 +72,7 @@ public class Book {
 
     public Builder name(String name) {
       this.name = name;
-          return this;
+      return this;
     }
 
     public Builder publishingHouse(String publishingHouse) {
@@ -81,5 +93,5 @@ public class Book {
       return new Book(this);
     }
   }
-
 }
+
