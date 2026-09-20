@@ -12,6 +12,11 @@ public class BookView {
   private final TextField publisherField = new TextField();
   private final TextField pagesField = new TextField();
   private final Button addButton = new Button("Add book");
+
+  private final TextField cloneSourceIsbnField = new TextField();
+  private final TextField cloneNewIsbnField = new TextField();
+  private final Button cloneButton = new Button("Clone book");
+
   private final Label messageLabel = new Label();
 
   private final VBox root;
@@ -22,7 +27,12 @@ public class BookView {
         new Label("Title:"), titleField,
         new Label("Publisher:"), publisherField,
         new Label("Total pages:"), pagesField,
-        addButton, messageLabel
+        addButton,
+        new Label("Clone an existing book!"),
+        new Label("Existing ISBN:"), cloneSourceIsbnField,
+        new Label("New ISBN:"), cloneNewIsbnField,
+        cloneButton,
+        messageLabel
     );
     root.setPadding(new Insets(20));
   }
@@ -33,5 +43,8 @@ public class BookView {
   public TextField getPublisherField() { return publisherField; }
   public TextField getPagesField() { return pagesField; }
   public Button getAddButton() { return addButton; }
+  public TextField getCloneSourceIsbnField() { return cloneSourceIsbnField; }
+  public TextField getCloneNewIsbnField() { return cloneNewIsbnField; }
+  public Button getCloneButton() { return cloneButton; }
   public Label getMessageLabel() { return messageLabel; }
 }
