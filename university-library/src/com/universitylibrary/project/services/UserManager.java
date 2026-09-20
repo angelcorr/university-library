@@ -25,6 +25,8 @@ public class UserManager {
   }
 
   public User addUser(String id, String fullName, String address, String phoneNumber) {
+    verifyIfUserExists(id);
+
     User user = new User.Builder()
         .id(id)
         .fullName(fullName)
@@ -36,9 +38,9 @@ public class UserManager {
     return user;
   }
 
-  public void verifyUser(User user) {
-    if(searchById(user.getId()).isPresent()) {
-      throw new IllegalStateException("There is an existing user with id" + user.getId());
+  public void verifyIfUserExists(String id) {
+    if(searchById(id).isPresent()) {
+      throw new IllegalStateException("There is an existing user with id " + id);
     }
   }
 
