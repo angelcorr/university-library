@@ -54,7 +54,7 @@ public class LibraryManager {
     Book searchedBook = null;
 
     for (Book book: booksInStock) {
-      if (book.getName().equals(name)) {
+      if (book.getTitle().equals(name)) {
         searchedBook = book;
       } else {
         throw new BookNotFound(book);
