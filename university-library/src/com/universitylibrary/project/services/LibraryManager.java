@@ -45,36 +45,27 @@ public class LibraryManager {
     return book;
   }
 
+  public void addExistingBook(Book book) {
+    for (Book existing : booksInStock) {
+      if (existing.getIsbn().equals(book.getIsbn())) {
+        throw new IllegalStateException("A book with this ISBN already exists: " + book.getIsbn());
+      }
+    }
+    booksInStock.add(book);
+  }
+
 
   public List<Book> getBooksInStock() {
     return Collections.unmodifiableList(booksInStock);
   }
 
-  public Book searchBookByName(String name) {
-    Book searchedBook = null;
-
-    for (Book book: booksInStock) {
-      if (book.getTitle().equals(name)) {
-        searchedBook = book;
-      } else {
-        throw new BookNotFound(book);
-      }
-    }
-
-    return searchedBook;
-  }
-
   public Book searchBookByIsbn(String isbn) {
-    Book searchedBookByIsbn = null;
-
     for (Book book: booksInStock) {
       if (book.getIsbn().equals(isbn)) {
-        searchedBookByIsbn = book;
-      } else {
-        throw new BookNotFound(book);
+        return book;
       }
     }
 
-    return searchedBookByIsbn;
+    throw new BookNotFound(isbn);
   }
 }
