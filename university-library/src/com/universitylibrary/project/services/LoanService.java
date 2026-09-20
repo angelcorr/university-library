@@ -21,7 +21,7 @@ public class LoanService {
     Book book = manager.searchBookByIsbn(isbn);
 
     if (book.isLoaned()) {
-      throw new BookNotFound(book);
+      throw new BookNotFound(book.getIsbn());
     }
 
     book.setLoanedStatus(true);
@@ -30,7 +30,7 @@ public class LoanService {
         .book(book)
         .userId(userId)
         .loanDate(LocalDate.now())
-        .returnDate(LocalDate.now().plusDays(20))
+        .limitDate(LocalDate.now().plusDays(20))
         .build();
 
     activeLoans.add(loan);
