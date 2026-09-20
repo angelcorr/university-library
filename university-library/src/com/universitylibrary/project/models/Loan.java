@@ -81,6 +81,11 @@ public class Loan {
       return this;
     }
 
+    public Builder limitDate(LocalDate limitDate) {
+      this.limitDate = limitDate;
+      return this;
+    }
+
     public Loan build() {
       if (book == null || userId == null) {
         throw new IllegalStateException("Book and user are mandatory");

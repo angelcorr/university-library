@@ -16,6 +16,7 @@ public class LoanController {
 
   private void attachEvents() {
     view.getLoanButton().setOnAction(e -> handleLoan());
+    view.getReturnButton().setOnAction(e -> handleReturn());
   }
 
   private void handleLoan() {
@@ -25,10 +26,27 @@ public class LoanController {
           view.getUserIdField().getText()
       );
       view.getMessageLabel().setText("Loan created: " + loan.toString());
-      view.getIsbnField().clear();
-      view.getUserIdField().clear();
+      clearFields();
     } catch (Exception ex) {
       view.getMessageLabel().setText("Error: " + ex.getMessage());
     }
+  }
+
+  private void handleReturn() {
+    try {
+      loanService.returnBook(
+          view.getIsbnField().getText(),
+          view.getUserIdField().getText()
+      );
+      view.getMessageLabel().setText("Book returned successfully");
+      clearFields();
+    } catch (Exception ex) {
+      view.getMessageLabel().setText("Error: " + ex.getMessage());
+    }
+  }
+
+  private void clearFields() {
+    view.getIsbnField().clear();
+    view.getUserIdField().clear();
   }
 }
