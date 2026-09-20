@@ -7,7 +7,7 @@ public class Library {
   private String address;
   private String schedule;
   private double penaltyPercentage; // This attribute may change
-  private ArrayList<Users> userList;
+  private ArrayList<User> userList;
   private ArrayList<Book> bookList;
 
   private Library(Builder builder) {
@@ -55,7 +55,7 @@ public class Library {
     private String address;
     private String schedule;
     private double penaltyPercentage = 20.000;
-    private ArrayList<Users> userList;
+    private ArrayList<User> userList;
     private ArrayList<Book> bookList;
 
     public Builder name(String name) {
@@ -63,28 +63,28 @@ public class Library {
       return this;
     }
 
-    public Builder address() {
+    public Builder address(String address) {
       this.address = address;
       return this;
     }
 
-    public Builder schedule() {
+    public Builder schedule(String schedule) {
       this.schedule = schedule;
       return this;
     }
 
-    public Builder penaltyPercentage() {
+    public Builder penaltyPercentage(double penaltyPercentage) {
       this.penaltyPercentage = penaltyPercentage;
       return this;
     }
 
-    public Builder userList() {
-      this.userList = userList;
+    public Builder userList(ArrayList<User> userList) {
+      this.userList.addAll(userList);
       return this;
     }
 
-    public Builder bookList() {
-      this.bookList = bookList;
+    public Builder bookList(ArrayList<Book> bookList) {
+      this.bookList.addAll(bookList);
       return this;
     }
 
