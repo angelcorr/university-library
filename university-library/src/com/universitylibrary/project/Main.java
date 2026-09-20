@@ -3,6 +3,7 @@ package com.universitylibrary.project;
 import com.universitylibrary.project.controller.BookController;
 import com.universitylibrary.project.controller.LoanController;
 import com.universitylibrary.project.controller.UserController;
+import com.universitylibrary.project.models.Library;
 import com.universitylibrary.project.services.LibraryManager;
 import com.universitylibrary.project.services.LoanService;
 import com.universitylibrary.project.services.UserManager;
@@ -39,7 +40,8 @@ public class Main extends Application {
     tabPane.getTabs().forEach(tab -> tab.setClosable(false));
 
     stage.setScene(new Scene(tabPane, 450, 400));
-    stage.setTitle("University Library");
+    Library library = Library.getInstance();
+    stage.setTitle(library.getName() + " - " + library.getAddress());
     stage.show();
   }
 
