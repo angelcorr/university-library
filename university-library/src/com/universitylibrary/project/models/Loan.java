@@ -1,7 +1,6 @@
 package com.universitylibrary.project.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Loan {
   private final Book book;
@@ -31,7 +30,7 @@ public class Loan {
   }
 
   public String getBookName() {
-    return book.getName();
+    return book.getTitle();
   }
 
   public String getUserId() {

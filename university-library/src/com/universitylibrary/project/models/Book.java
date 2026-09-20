@@ -1,17 +1,15 @@
 package com.universitylibrary.project.models;
 
-import java.util.ArrayList;
-
 public class Book {
   private String isbn;
-  private String name;
+  private String title;
   private String publishingHouse;
   private Integer totalPages;
   private boolean isLoaned = false;
 
   public Book(Builder builder) {
     this.isbn = builder.isbn;
-    this.name = builder.name;
+    this.title = builder.name;
     this.publishingHouse = builder.publishingHouse;
     this.totalPages = builder.totalPages;
   }
@@ -20,8 +18,8 @@ public class Book {
     return isbn;
   }
 
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
 
   public String getPublishingHouse() {
@@ -46,7 +44,7 @@ public class Book {
 
   @Override
   public String toString() {
-    return "Book title" + name + ". Was published by " + publishingHouse + " and has " + totalPages + " pages.";
+    return "Book title" + title + ". Was published by " + publishingHouse + " and has " + totalPages + " pages.";
   }
 
   public static class Builder {
