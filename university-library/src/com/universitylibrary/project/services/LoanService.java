@@ -1,13 +1,11 @@
 package com.universitylibrary.project.services;
 
-import com.universitylibrary.project.exceptions.BookNotFound;
+import com.universitylibrary.project.exceptions.BookAlreadyLoaned;
 import com.universitylibrary.project.models.Book;
 import com.universitylibrary.project.models.Loan;
 
 import java.time.LocalDate;
 import java.util.*;
-
-import static java.util.stream.Collectors.toList;
 
 public class LoanService {
   private final LibraryManager manager;
@@ -21,7 +19,7 @@ public class LoanService {
     Book book = manager.searchBookByIsbn(isbn);
 
     if (book.isLoaned()) {
-      throw new BookNotFound(book.getIsbn());
+      throw new BookAlreadyLoaned(book.getIsbn());
     }
 
     book.setLoanedStatus(true);
