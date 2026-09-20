@@ -53,4 +53,18 @@ public class LibraryManager {
 
     return searchedBook;
   }
+
+  public Book searchBookByIsbn(String isbn) {
+    Book searchedBookByIsbn = null;
+
+    for (Book book: booksInStock) {
+      if (book.getIsbn().equals(isbn)) {
+        searchedBookByIsbn = book;
+      } else {
+        throw new BookNotFound(book);
+      }
+    }
+
+    return searchedBookByIsbn;
+  }
 }
