@@ -20,7 +20,7 @@ public class LoanService {
   public Loan loanBook(String isbn, String userId) {
     Book book = manager.searchBookByIsbn(isbn);
 
-    if (!book.isLoaned()) {
+    if (book.isLoaned()) {
       throw new BookNotFound(book);
     }
 

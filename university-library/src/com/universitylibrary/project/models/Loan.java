@@ -50,6 +50,11 @@ public class Loan {
     return returnDate;
   }
 
+  @Override
+  public String toString() {
+    return "Book loaned: " + getBookName() + ", and was loaned by user: " + getUserId();
+  }
+
   public static class Builder {
     private Book book;
     private String userId;

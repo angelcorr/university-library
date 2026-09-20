@@ -44,6 +44,11 @@ public class Book {
     this.isLoaned = loanedState;
   }
 
+  @Override
+  public String toString() {
+    return "Book title" + name + ". Was published by " + publishingHouse + " and has " + totalPages + " pages.";
+  }
+
   public static class Builder {
     private String isbn;
     private String name;

@@ -15,7 +15,6 @@ public class Library {
    this.address = builder.address;
    this.schedule = builder.schedule;
    this.penaltyPercentage = builder.penaltyPercentage;
-   this.bookList = builder.bookList;
   }
 
   public String getName() {
@@ -55,8 +54,6 @@ public class Library {
     private String address;
     private String schedule;
     private double penaltyPercentage = 20.000;
-    private ArrayList<User> userList;
-    private ArrayList<Book> bookList;
 
     public Builder name(String name) {
       this.name = name;
@@ -78,18 +75,8 @@ public class Library {
       return this;
     }
 
-    public Builder userList(ArrayList<User> userList) {
-      this.userList.addAll(userList);
-      return this;
-    }
-
-    public Builder bookList(ArrayList<Book> bookList) {
-      this.bookList.addAll(bookList);
-      return this;
-    }
-
     public Library build() {
-      if (name == null || address == null || schedule == null || userList.toArray().length == 0 || bookList.toArray().length == 0) {
+      if (name == null || address == null || schedule == null) {
         throw new IllegalStateException("Name, address, schedule, userList and book list are mandatory");
       }
 
