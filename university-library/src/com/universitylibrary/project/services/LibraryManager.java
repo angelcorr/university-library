@@ -5,8 +5,8 @@ import com.universitylibrary.project.models.Book;
 import com.universitylibrary.project.models.Library;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class LibraryManager {
   private static LibraryManager instance;
@@ -46,26 +46,23 @@ public class LibraryManager {
   }
 
   public void addExistingBook(Book book) {
-    for (Book existing : booksInStock) {
-      if (existing.getIsbn().equals(book.getIsbn())) {
-        throw new IllegalStateException("A book with this ISBN already exists: " + book.getIsbn());
-      }
-    }
+    verifyIfBookExists(book.getIsbn());
     booksInStock.add(book);
   }
 
-
-  public List<Book> getBooksInStock() {
-    return Collections.unmodifiableList(booksInStock);
+  public void verifyIfBookExists(String isbn) {
+    if (findByIsbn(isbn).isPresent()) {
+      throw new IllegalStateException("A book with this ISBN already exists: " + isbn);
+    }
   }
 
   public Book searchBookByIsbn(String isbn) {
-    for (Book book: booksInStock) {
-      if (book.getIsbn().equals(isbn)) {
-        return book;
-      }
-    }
+    return findByIsbn(isbn).orElseThrow(() -> new BookNotFound(isbn));
+  }
 
-    throw new BookNotFound(isbn);
+  private Optional<Book> findByIsbn(String isbn) {
+    return booksInStock.stream()
+        .filter(book -> book.getIsbn().equals(isbn))
+        .findFirst();
   }
 }
